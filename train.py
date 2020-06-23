@@ -183,12 +183,13 @@ if __name__ == '__main__':
 
             mse=nn.MSELoss()
 
-            # calculate the loss for generator
+            # calculate the loss for autoencoder
             ae_loss=mse(decoder_out,x_float)+triplet_hashing_loss(z,x) # the total loss for autodecoder
             
             ae_optimizer.zero_grad() # set the gradient to zero before backpropagate
             ae_loss.backward() # backpropagate the loss 
             ae_optimizer.step() # update the parameters
+            
             # print the intermediate loss
             if (i+1)%100==0:
                 print('Epoch[{}/{}],d_loss:{:.6f},g_loss:{:.6f},'
